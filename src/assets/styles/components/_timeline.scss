@@ -1,0 +1,198 @@
+.timeline {
+  margin-top: 100px;
+  padding: 60px 0;
+}
+
+.timeline-container {
+  position: relative;
+
+  @include flex(column, center, start);
+
+  width: 100%;
+  margin-top: 80px;
+}
+
+.progress-bar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 4px;
+
+  background-color: $gray;
+
+  .line-fill {
+    position: absolute;
+    z-index: 5;
+    inset: 0;
+
+    height: 0%;
+
+    background-color: $fill-color;
+  }
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-areas: 'content marker date';
+  grid-template-columns: 1fr 100px 1fr;
+  align-items: center;
+
+  width: 100%;
+  min-height: 200px;
+
+  .content {
+    position: relative;
+
+    grid-area: content;
+    gap: 20px;
+
+    padding: 20px;
+
+    background-color: $card-bg;
+    border: $border;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+
+    transition: all 0.6s;
+
+    &::after {
+      content: '';
+
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+      width: 0;
+      height: 0;
+
+      border: 10px solid transparent;
+    }
+
+    .img-wrapper {
+      width: 100%;
+
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+    }
+
+    &.add-action {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    &.remove-action {
+      transform: translateY(150px);
+      opacity: 0;
+    }
+
+    @include flex(column, center, center);
+  }
+
+  .marker {
+    position: relative;
+    z-index: 10;
+
+    grid-area: marker;
+    justify-self: center;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+
+    transition: background-color 0.6s;
+
+    &.add-action {
+      background-color: $fill-color;
+
+      svg {
+        fill: $gray;
+      }
+    }
+
+    &.remove-action {
+      background-color: $gray;
+
+      svg {
+        fill: $black;
+      }
+    }
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .date {
+    grid-area: date;
+    transition: color 0.6s;
+
+    &.add-action {
+      color: $fill-color;
+    }
+  }
+
+  &:nth-child(odd) {
+    grid-template-areas: 'date marker content';
+    grid-template-columns: 1fr 100px 1fr;
+
+    .content::after {
+      left: -20px;
+      border-right-color: $card-bg;
+    }
+
+    .date {
+      text-align: right;
+    }
+  }
+
+  &:nth-child(even) .content::after {
+    right: -20px;
+    border-left-color: $card-bg;
+  }
+}
+
+@media (width < 800px) {
+  .timeline-container {
+    gap: 20px;
+  }
+
+  .progress-bar {
+    left: 40px;
+  }
+
+  .timeline-item {
+    grid-template-areas: 'marker date content';
+    grid-template-columns: 80px 80px 1fr;
+
+    &.content::after {
+      right: auto;
+      left: -20px;
+      border-right-color: $card-bg;
+      border-left-color: transparent;
+    }
+
+    &:nth-child(odd) {
+      grid-template-areas: 'marker date content';
+      grid-template-columns: 80px 80px 1fr;
+
+      .date {
+        text-align: left;
+      }
+    }
+
+    &:nth-child(even) .content::after {
+      right: auto;
+      left: -20px;
+      border-right-color: $card-bg;
+      border-left-color: transparent;
+    }
+  }
+}

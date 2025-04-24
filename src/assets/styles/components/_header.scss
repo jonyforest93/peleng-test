@@ -1,0 +1,19 @@
+@import '../variables';
+
+.header {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+
+  width: 100%;
+  padding: 20px 0;
+
+  background-color: #fff;
+  border-bottom: $border;
+}
+
+.header-text {
+  font-size: 24px;
+  text-align: center;
+  text-transform: uppercase;
+}

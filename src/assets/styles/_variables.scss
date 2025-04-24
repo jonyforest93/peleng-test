@@ -1,0 +1,16 @@
+@mixin flex($flex-direction: row, $justify-content, $align-items) {
+  display: flex;
+  flex-direction: $flex-direction;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+$border: 1px solid #f5f5f5;
+$border-radius: 0.625rem;
+$box-shadow:
+  0 10px 15px -3px rgb(230 230 230 / 40%),
+  0 4px 6px -4px rgb(230 230 230 / 40%);
+$fill-color: #c00;
+$gray: #e0dede;
+$black: #333;
+$card-bg: #d3ecaa;
